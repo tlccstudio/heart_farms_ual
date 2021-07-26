@@ -1,16 +1,39 @@
 <template>
   <q-page class="column justify-center items-center">
-    <img class="logo" alt="Telos logo" src="~assets/telos-logo-full.png" />
-
     <h6 class="description">
-      Oracles on Telos update every few seconds.
     </h6>
+      
+      <center>
+        <iframe src='' id='content_iframe' style='width: 100%; height: 100%; z-index: 1; position: fixed; top: 45px; left: 0px; border: 0px solid black;'>
+        </iframe>
+      </center>
+    
   </q-page>
 </template>
 
 <script>
+
+import { mapGetters, mapActions } from "vuex";
+
 export default {
-  name: "Index"
+  name: "Index",
+  data() {
+    return {
+      tObject: null,
+      transaction: null,
+      showTransaction: null
+    };
+  },
+  mounted() {
+    reqIFRAME_SRC();
+  },
+  beforeDestroy () {
+  },
+  methods: {
+    ...mapActions("account", ["accountExists"]),
+    aFunction() {
+    }
+  }
 };
 </script>
 

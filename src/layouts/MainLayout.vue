@@ -12,11 +12,13 @@
         />
 
         <q-toolbar-title>
-          Telos Oracles Demo
+          <a href="https://farm.heart-church.org/" style="text-decoration: none;">
+            <img class="logo" alt="Heart Farms" style="width: 42px; height: 42px; margin-bottom: -11px; margin-right: 10px;" src="icons/favicon-128x128.png" />
+            <span style="font-family: ZCOOL KuaiLe; color: var(--q-color-accent); font-size: 22pt; margin-bottom: 15px;">Heart Farms</span>
+          </a>
         </q-toolbar-title>
 
         <login-button></login-button>
-        <div><!--Quasar v{{ $q.version }}--></div>
       </q-toolbar>
     </q-header>
 
@@ -28,7 +30,7 @@
     >
       <q-list>
         <q-item-label header class="text-grey-8">
-          Demo Pages
+          Heart Farms dApp
         </q-item-label>
         <ExamplePage
           v-for="link in examplePages"
@@ -36,7 +38,7 @@
           v-bind="link"
         />
         <q-item-label header class="text-grey-8">
-          Project Links
+          Essential Links
         </q-item-label>
         <EssentialLink
           v-for="link in essentialLinks"
@@ -59,55 +61,48 @@ import LoginButton from "components/LoginButton.vue";
 
 const pagesData = [
   {
-    title: "Visualized Price Oracles",
-    caption: "Watch the price feeds come in",
-    icon: "online_prediction",
-    path: "/oracle"
-  },
-  {
-    title: "Simplified Price Oracles",
-    caption: "Simplified example of price data feed from store",
-    icon: "book",
-    path: "/oraclesimple"
-  },
-  {
-    title: "Oracles Leaderboard",
-    caption: "Leaderboards for oracle counts",
-    icon: "star",
-    path: "/leaderboard"
-  },
-  {
-    title: "Random Number Generator",
-    caption: "Request a random number from the RNG oracles",
-    icon: "room_preferences",
-    path: "/requestrng"
-  },{
-    title: "Telos Trail",
-    caption: "Using RNG oracle to decide your fate!",
-    icon: "add_road",
-    path: "/telos-trail"
-  },
+    title: "Home",
+    caption: "Heart Farms overview data.",
+    icon: "home",
+    path: "/"
+  }//,
 ];
 
 const linksData = [
   {
-    title: "RNG Consumer Contract",
-    caption: "github.com/telosnetwork/rng-consumer",
-    icon: "fab fa-github",
-    link: "https://github.com/telosnetwork/rng-consumer"
+    title: "Create Telos Account",
+    caption: "A free blockchain account",
+    icon: "fas fa-rocket",
+    link: "https://telos.net/Create-Account/"
+  },{
+    title: "Tutorial: Land Auction",
+    caption: "What is a virtual land auction?",
+    icon: "menu_book",
+    link: "https://farm.heart-church.org/virtual-land-auction-tutorial/"
+  },{
+    title: "Tutorial: Wallet Signing",
+    caption: "Telos wallet operation",
+    icon: "menu_book",
+    link: "https://farm.heart-church.org/wallet-signing/"
   },
   {
-    title: "Telos Oracle RNG",
-    caption: "github.com/telosnetwork/telos-oracle-rng",
-    icon: "fab fa-github",
-    link: "https://github.com/telosnetwork/telos-oracle-rng"
+    title: "Claiming a .jc Account",
+    caption: "After you have acquired a land plot",
+    icon: "menu_book",
+    link: "https://steemit.com/hive-108514/@marcelo182/creating-a-jc-account-using-heart-farms-heartfarmsio/"
   },
   {
-    title: "This oracle dashboard",
-    caption: "github.com/telosnetwork/telos-oracle-dashboard",
-    icon: "fab fa-github",
-    link: "https://github.com/telosnetwork/telos-oracle-dashboard"
+    title: "Heart Farms: FAQ",
+    caption: "Questions answered here",
+    icon: "menu_book",
+    link: "https://farm.heart-church.org/faq/"
   },
+  {
+    title: "Heart Church Organization",
+    caption: "heart-church.org",
+    icon: "favorite",
+    link: "https://heart-church.org/"
+  }
 ];
 
 export default {
@@ -119,6 +114,9 @@ export default {
       essentialLinks: linksData,
       examplePages: pagesData
     };
+  },
+  updated() {
+    //reqIFRAME_SRC();
   }
 };
 </script>

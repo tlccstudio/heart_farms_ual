@@ -20,9 +20,57 @@
 
     <!-- JS Globals -->
     <script>
-      var gRenderLoopForceStop = false;
+      //iFrame Message Constants
+      const MSG_TYPE_TEST = 'TEST';
+      const MSG_TYPE_ISSUE_BID = "ISSUE_BID";
+      const MSG_TYPE_NOTIFY_LOGIN = "LOGIN_NOTICE";
+      const MSG_TYPE_SIGNIN = "signin";
+
+    function getUrlParameter(sParam) {
+      var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+        sURLVariables = sPageURL.split('&'),
+        sParameterName,
+        i;
+
+      for (i = 0; i < sURLVariables.length; i++) {
+        sParameterName = sURLVariables[i].split('=');
+
+        if (sParameterName[0] === sParam) {
+          return sParameterName[1] === undefined ? null : sParameterName[1];
+        }
+      }
+    } 
+
+    function reqIFRAME_SRC(){
+      var iframe = document.getElementById('content_iframe');
+
+      if(iframe != null) {
+          var land = getUrlParameter("l");
+          var land_var = '';
+
+          if(land != undefined)
+          { land_var = "l=" + land + '&'; }
+
+          var debug = getUrlParameter("debug");
+          var debug_var = '';
+
+          if(debug != undefined)
+          { debug_var = "debug=" + debug + '&'; }
+
+          var url = window.location.href;
+          url = url.split('?')[0];
+          url = url + 'xeros/hflive/canvas.php?' + land_var + debug_var;
+          
+          var c_url = iframe.src;
+          
+          //console.log("url -- " + url);
+          //console.log("c_url -- " + c_url);
+          
+          if(url !== c_url)
+          { iframe.src = url; }
+      }
+    }
     </script>
-    <!-- <script src="https://d3js.org/d3.v6.min.js"></script> -->
 
   </head>
   <body>
