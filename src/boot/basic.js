@@ -1,11 +1,11 @@
-// Xeros - v0.90
+// basic.js - v1.00vue
 //  2021 Copyright & Development by:
 //      TLCC Consultants Pte. Ltd.
 //      email: studio@tlccc.sg
 //      website: https://defi.tlccc.sg/
 //      Company of Singapore
 //
-//  basic.js - file ver: 1.00
+//  basic.js - file ver: 1.00vue
 
 const isObject = function(val) {
     if (val === null) { return false;}

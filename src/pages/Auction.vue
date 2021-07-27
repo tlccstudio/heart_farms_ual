@@ -16,7 +16,7 @@
 import { mapGetters, mapActions } from "vuex";
 
 export default {
-  name: "Index",
+  name: "Auction",
   data() {
     return {
       tObject: null,

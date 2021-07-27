@@ -1,9 +1,9 @@
 {
-  "name": "telos-oracle-dashboard",
+  "name": "Heart Farms",
   "version": "0.0.1",
-  "description": "A dashboard for Telos Oracles",
-  "productName": "Telos Oracle Dashboard",
-  "author": "Jesse Schulman <jesse@caleos.io>",
+  "description": "Heart Farms is an economic farming and sandbox style of game built on the Telos blockchain.",
+  "productName": "Heart Farms",
+  "author": "Heart Church Decentralized Community, UAL by Jesse Schulman <jesse@caleos.io>",
   "scripts": {
     "lint": "eslint --ext .js,.vue ./",
     "test": "echo \"No test specified\" && exit 0"

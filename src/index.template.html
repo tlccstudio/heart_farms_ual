@@ -24,8 +24,9 @@
       const MSG_TYPE_TEST = 'TEST';
       const MSG_TYPE_ISSUE_BID = "ISSUE_BID";
       const MSG_TYPE_NOTIFY_LOGIN = "LOGIN_NOTICE";
+      const MSG_TYPE_NOTIFY_LOGOUT = "LOGOUT_NOTICE";
       const MSG_TYPE_SIGNIN = "signin";
-
+      
     function getUrlParameter(sParam) {
       var sPageURL = decodeURIComponent(window.location.search.substring(1)),
         sURLVariables = sPageURL.split('&'),
@@ -41,11 +42,16 @@
       }
     } 
 
-    function reqIFRAME_SRC(){
+    function reqIFRAME_SRC(sLand){
       var iframe = document.getElementById('content_iframe');
 
       if(iframe != null) {
-          var land = getUrlParameter("l");
+          var land = "";
+          if(sLand !== null){
+            land = sLand;
+          } else {
+            land = getUrlParameter("l");
+          }
           var land_var = '';
 
           if(land != undefined)
@@ -70,6 +76,19 @@
           { iframe.src = url; }
       }
     }
+
+
+    setTimeout(function() {
+      
+      var iFrame = document.getElementById('content_iframe');
+
+      iFrame.contentWindow.postMessage(JSON.stringify({
+          message: MSG_TYPE_TEST,
+          data: 'parent to child data here...'
+      }), location.origin);
+      
+    }, 3000);
+
     </script>
 
   </head>

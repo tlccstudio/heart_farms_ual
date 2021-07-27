@@ -18,7 +18,9 @@ export default {
     return {
       client: null,
       startFrom: 0,
-      moment
+      moment,
+      loopSwitch: false,
+      cAccountName: null
     };
   },
   mounted() {
@@ -28,6 +30,12 @@ export default {
     } else {
       window.attachEvent('onmessage', this.listenWindowMessage)
     }
+
+    this.loopSwitch = true;
+    var aHeartbeat = this.appHeartbeat;
+    setTimeout(function() {
+      aHeartbeat();
+    }, 2000);
   },
   beforeDestroy () {
     if (window.addEventListener) {
@@ -35,10 +43,30 @@ export default {
     } else {
       window.detachEvent('onmessage', this.listenWindowMessage)
     }
+    this.loopSwitch = false;
   },
   methods: {
-    ...mapActions("oracles", ["updatePriceFeeds", "loadLeaderboards", "updateRNGFeeds"]),
+    ...mapActions("oracles", ["updatePriceFeeds", "updateRNGFeeds"]),
     ...mapActions("account", ["accountExists"]),
+
+    appHeartbeat() {
+
+      if(this.$store.state.account.accountName !== this.cAccountName){
+
+        this.cAccountName = this.$store.state.account.accountName;
+
+        if(typeof this.cAccountName !== 'undefined')
+        { this.$store.$msg.issueLoginNoticeToChild(this.cAccountName); }
+        else
+        { this.$store.$msg.issueLogoutNoticeToChild(); }
+      }
+
+      if(this.loopSwitch) {
+        var aHeartbeat = this.appHeartbeat;
+
+        setTimeout(function() { aHeartbeat(); }, 500);
+      }
+    },
 
     onAction(data) {
       if (data.content.act.name == "write") {
@@ -49,10 +77,6 @@ export default {
     },
 
     onDelta(data) {
-    },
-
-    async loadTableData() {
-      await this.loadLeaderboards();
     },
 
     setupStreamClient() {
@@ -77,7 +101,6 @@ export default {
           filters: []
         });
 
-        
         /*this.client.streamActions({
           contract: process.env.ORACLE_CONSUMER,
           action: "randreceipt",
@@ -123,7 +146,6 @@ export default {
       this.client.connect(() => {
         console.log("Connected to Hyperion Stream!");
       });
-
     },
     listenWindowMessage(oEvent) {  
       var xtype = "";
@@ -187,6 +209,7 @@ export default {
               break;
               case MSG_TYPE_SIGNIN:
                 console.log("signin notice received...");
+                console.log(data);
               break;
               default:
               break;

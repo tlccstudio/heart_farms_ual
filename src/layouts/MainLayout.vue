@@ -28,17 +28,71 @@
       bordered
       content-class="bg-grey-1"
     >
+
       <q-list>
         <q-item-label header class="text-grey-8">
-          Heart Farms dApp
+        Land Selection:
+        </q-item-label>
+
+        <center>
+        <q-btn-dropdown color="info" :label="selectedLand">
+        <q-list>
+          <q-item clickable v-close-popup @click="onItemClick('laa11')">
+            <q-item-section>
+              <q-item-label>The Emerald Coast</q-item-label>
+            </q-item-section>
+          </q-item>
+
+          <q-item clickable v-close-popup @click="onItemClick('laa12')">
+            <q-item-section>
+              <q-item-label>Sapphire Isle</q-item-label>
+            </q-item-section>
+          </q-item>
+
+          <q-item clickable v-close-popup @click="onItemClick('laa13')">
+            <q-item-section>
+              <q-item-label>Pelican Harbor</q-item-label>
+            </q-item-section>
+          </q-item>
+
+          <q-item clickable v-close-popup @click="onItemClick('laa21')">
+            <q-item-section>
+              <q-item-label>Silverton Strait</q-item-label>
+            </q-item-section>
+          </q-item>
+
+          <q-item clickable v-close-popup @click="onItemClick('laa22')">
+            <q-item-section>
+              <q-item-label>The Topaz River</q-item-label>
+            </q-item-section>
+          </q-item>
+
+          <q-item clickable v-close-popup @click="onItemClick('laa23')">
+            <q-item-section>
+              <q-item-label>Honey Fields</q-item-label>
+            </q-item-section>
+          </q-item>
+
+          <q-item clickable v-close-popup @click="onItemClick('laa32')">
+            <q-item-section>
+              <q-item-label>Chrysolite Mountain</q-item-label>
+            </q-item-section>
+          </q-item>
+        </q-list>
+        </q-btn-dropdown>
+        </center>
+
+        <q-item-label header class="text-grey-8">
+          System Links
         </q-item-label>
         <ExamplePage
           v-for="link in examplePages"
           :key="link.title"
           v-bind="link"
         />
+
         <q-item-label header class="text-grey-8">
-          Essential Links
+          External Links
         </q-item-label>
         <EssentialLink
           v-for="link in essentialLinks"
@@ -61,11 +115,11 @@ import LoginButton from "components/LoginButton.vue";
 
 const pagesData = [
   {
-    title: "Home",
-    caption: "Heart Farms overview data.",
-    icon: "home",
+    title: "Dashboard",
+    caption: "Home",
+    icon: "computer",
     path: "/"
-  }//,
+  }
 ];
 
 const linksData = [
@@ -112,11 +166,39 @@ export default {
     return {
       leftDrawerOpen: false,
       essentialLinks: linksData,
-      examplePages: pagesData
+      examplePages: pagesData,
+      selectedLand: "HEART LANDS"
     };
   },
   updated() {
     //reqIFRAME_SRC();
+  },
+  methods: {
+    onItemClick(land) {
+      //var sURL = window.location.href;
+      //sURL = sURL.split("?")[0] + "?l="+land;
+      //window.location.href = sURL;
+
+      if(land === "laa11"){
+        this.selectedLand = "The Emerald Coast";
+      } else if( land === "laa12" ) {
+        this.selectedLand = "Sapphire Isle";
+      } else if( land === "laa13" ) {
+        this.selectedLand = "Pelican Harbor";
+      } else if (land === "laa21" ) {
+        this.selectedLand = "Silverton Strait";
+      } else if (land === "laa22" ) {
+        this.selectedLand = "The Topaz River"; 
+      } else if (land === "laa23" ) {
+        this.selectedLand = "Honey Fields"; 
+      } else if (land === "laa32") {
+        this.selectedLand = "Chrysolite Mountain";
+      } else {
+        this.selectedLand = "HEART LANDS";
+      }
+
+      reqIFRAME_SRC(land);
+    }
   }
 };
 </script>
