@@ -22,6 +22,7 @@
     <script>
 
       const DEFAULT_LAND = "laa32";
+      var selected_Land = "laa32";
 
       //iFrame Message Constants
       const MSG_TYPE_TEST = 'TEST';
@@ -31,6 +32,7 @@
       const MSG_TYPE_SIGNIN = "signin";
       const MSG_TYPE_REFRESH_MAP = "MAP_REFRESH";
       const MSG_TYPE_PUBLISH_ACTION = "PUBLISH_ACTION";
+      const MSG_TYPE_REQUEST_SIGNIN = "req_signin";
       
     function getUrlParameter(sParam) {
       var sPageURL = decodeURIComponent(window.location.search.substring(1)),
@@ -47,7 +49,7 @@
       }
     } 
 
-    function reqIFRAME_SRC(sLand){
+    function reqIFRAME_SRC(sLand, forceRefresh = false){
       var iframe = document.getElementById('content_iframe');
 
       if(iframe != null) {
@@ -66,6 +68,8 @@
             land_var = "l=" + land + '&';
           }
 
+          selected_Land = land;
+
           var debug = getUrlParameter("debug");
           var debug_var = '';
 
@@ -81,7 +85,7 @@
           //console.log("url -- " + url);
           //console.log("c_url -- " + c_url);
           
-          if(url !== c_url)
+          if((url !== c_url) || (forceRefresh))
           { iframe.src = url; }
       }
     }

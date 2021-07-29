@@ -244,6 +244,15 @@ export default {
                 console.log("signin notice received...");
                 console.log(data);
               break;
+              case MSG_TYPE_REQUEST_SIGNIN:
+                console.log("CHILD requesting signin notice...");
+                
+                if((typeof this.cAccountName !== 'undefined') && (this.cAccountName !== null))
+                { this.$store.$msg.issueLoginNoticeToChild(this.cAccountName); }
+              break;
+              case MSG_TYPE_REFRESH_MAP:
+                reqIFRAME_SRC(selected_Land, true);
+              break;
               case MSG_TYPE_PUBLISH_ACTION:
                 console.log("Msg Type -- MSG_TYPE_PUBLISH_ACTION Received from Child window.");
                 console.log(data);
@@ -287,11 +296,13 @@ export default {
         var iFrame = document.getElementById('content_iframe');
 
         setTimeout(function(){
-          iFrame.contentWindow.postMessage(JSON.stringify({
+          reqIFRAME_SRC(selected_Land, true);
+
+          /*iFrame.contentWindow.postMessage(JSON.stringify({
             message: MSG_TYPE_REFRESH_MAP,
             data: 'parent to child data here...'
-          }), location.origin);
-        }, 200);
+          }), location.origin);*/
+        }, 50);
         
       }
     },
@@ -306,11 +317,13 @@ export default {
         var iFrame = document.getElementById('content_iframe');
 
         setTimeout(function(){
-          iFrame.contentWindow.postMessage(JSON.stringify({
+          reqIFRAME_SRC(selected_Land, true);
+
+          /*iFrame.contentWindow.postMessage(JSON.stringify({
             message: MSG_TYPE_REFRESH_MAP,
             data: 'parent to child data here...'
-          }), location.origin);
-        }, 200);
+          }), location.origin);*/
+        }, 50);
         
       }
     }
