@@ -20,12 +20,17 @@
 
     <!-- JS Globals -->
     <script>
+
+      const DEFAULT_LAND = "laa32";
+
       //iFrame Message Constants
       const MSG_TYPE_TEST = 'TEST';
       const MSG_TYPE_ISSUE_BID = "ISSUE_BID";
       const MSG_TYPE_NOTIFY_LOGIN = "LOGIN_NOTICE";
       const MSG_TYPE_NOTIFY_LOGOUT = "LOGOUT_NOTICE";
       const MSG_TYPE_SIGNIN = "signin";
+      const MSG_TYPE_REFRESH_MAP = "MAP_REFRESH";
+      const MSG_TYPE_PUBLISH_ACTION = "PUBLISH_ACTION";
       
     function getUrlParameter(sParam) {
       var sPageURL = decodeURIComponent(window.location.search.substring(1)),
@@ -54,13 +59,17 @@
           }
           var land_var = '';
 
-          if(land != undefined)
+          if(typeof land !== 'undefined')
           { land_var = "l=" + land + '&'; }
+          else {
+            land = DEFAULT_LAND;
+            land_var = "l=" + land + '&';
+          }
 
           var debug = getUrlParameter("debug");
           var debug_var = '';
 
-          if(debug != undefined)
+          if(typeof debug !== 'undefined')
           { debug_var = "debug=" + debug + '&'; }
 
           var url = window.location.href;

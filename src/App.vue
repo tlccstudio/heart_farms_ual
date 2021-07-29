@@ -1,6 +1,28 @@
 <template>
   <div id="q-app">
     <router-view />
+    
+    <q-dialog v-model="showTransaction" confirm>
+        <q-card >
+          <q-card-section class="row">
+            <q-avatar icon="arrow_forward" color="primary" text-color="white" />
+            <span class="q-ml-sm">
+              Transaction sent, click to view in block explorer.
+            </span>
+            <q-item
+              clickable
+              tag="a"
+              target="_blank"
+              :href="`${explorerUrl}/transaction/${transaction}`"
+              class="q-ml-sm"
+              >{{ transaction }}</q-item
+            >
+          </q-card-section>
+          <q-card-actions align="right">
+            <q-btn flat label="Ok" color="primary" v-close-popup></q-btn>
+          </q-card-actions>
+        </q-card>
+      </q-dialog>
   </div>
 </template>
 <script>
@@ -20,8 +42,17 @@ export default {
       startFrom: 0,
       moment,
       loopSwitch: false,
-      cAccountName: null
+      cAccountName: null,
+      to: null,
+      amount: null,
+      memo: null,
+      showTransaction: null,
+      transaction: null,
+      explorerUrl: process.env.NETWORK_EXPLORER
     };
+  },
+  computed: {
+    ...mapGetters("account", ["isAuthenticated", "accountName"])
   },
   mounted() {
     //reqIFRAME_SRC();
@@ -200,10 +231,12 @@ export default {
                   console.log(data);
               break;
               case MSG_TYPE_ISSUE_BID:
-                this.tObject = {};
-                this.tObject.data = JSON.parse(data.data)[0];
-                console.log("Msg Type -- MSG_ISSUE Received from Child window.");
-                console.log(this.tObject.data);
+                console.log("Msg Type -- MSG_TYPE_ISSUE_BID Received from Child window.");
+                var oData = JSON.parse(data.data.replace('\\',''));
+
+                this.to = oData.receiver;
+                this.amount = oData.amount;
+                this.memo = oData.memo;
 
                 this.send();
               break;
@@ -211,9 +244,74 @@ export default {
                 console.log("signin notice received...");
                 console.log(data);
               break;
+              case MSG_TYPE_PUBLISH_ACTION:
+                console.log("Msg Type -- MSG_TYPE_PUBLISH_ACTION Received from Child window.");
+                console.log(data);
+                var oData = JSON.parse(data.data.replace('\\',''));
+                console.log(oData);
+
+                this.publishActions(oData.aActions);
+              break;
               default:
               break;
         } 
+      }
+    },
+    async send() {
+      if (!(await this.accountExists(this.to))) {
+        this.$q.notify({
+          type: "negative",
+          message: `Account ${this.to} does not exist`
+        });
+        return;
+      }
+
+      const actions = [
+        {
+          account: "revelation21",
+          name: "transfer",
+          data: {
+            from: this.accountName.toLowerCase(),
+            to: this.to,
+            quantity: `${parseFloat(this.amount).toFixed(4)} HEART`,
+            memo: this.memo
+          }
+        }
+      ];
+      const transaction = await this.$store.$api.signTransaction(actions);
+      if (transaction) {
+        this.showTransaction = true;
+        this.transaction = transaction.transactionId;
+
+        //push a refresh back down to child
+        var iFrame = document.getElementById('content_iframe');
+
+        setTimeout(function(){
+          iFrame.contentWindow.postMessage(JSON.stringify({
+            message: MSG_TYPE_REFRESH_MAP,
+            data: 'parent to child data here...'
+          }), location.origin);
+        }, 200);
+        
+      }
+    },
+    async publishActions(actions) {
+
+      const transaction = await this.$store.$api.signTransaction(actions);
+      if (transaction) {
+        this.showTransaction = true;
+        this.transaction = transaction.transactionId;
+
+        //push a refresh back down to child
+        var iFrame = document.getElementById('content_iframe');
+
+        setTimeout(function(){
+          iFrame.contentWindow.postMessage(JSON.stringify({
+            message: MSG_TYPE_REFRESH_MAP,
+            data: 'parent to child data here...'
+          }), location.origin);
+        }, 200);
+        
       }
     }
   }

@@ -1,8 +1,15 @@
 <template>
   <q-layout view="hHh lpR fFf">
-
-    <q-header elevated class="bg-primary text-white">
+    <q-header elevated>
       <q-toolbar>
+        <q-btn
+          flat
+          dense
+          round
+          icon="menu"
+          aria-label="Menu"
+          @click="rightDrawerOpen = !rightDrawerOpen"
+        />
 
         <q-toolbar-title>
           <a href="https://farm.heart-church.org/" style="text-decoration: none;">
@@ -12,23 +19,17 @@
         </q-toolbar-title>
 
         <login-button></login-button>
-
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="rightDrawerOpen = !rightDrawerOpen"
-        />
       </q-toolbar>
     </q-header>
 
-    <q-drawer :id="drawer_menu_1" v-model="rightDrawerOpen" side="right" bordered>
+    <q-drawer
+      v-model="rightDrawerOpen"
+      show-if-above
+      bordered
+      content-class="bg-grey-1"
+    >
+
       <q-list>
-
-        <q-btn round color="white" text-color="black" class="float-right q-my-sm q-mx-sm" icon="close" @click="rightDrawerOpen = !rightDrawerOpen" />
-
         <q-item-label header class="text-grey-8">
         Land Selection:
         </q-item-label>
@@ -99,19 +100,11 @@
           v-bind="link"
         />
       </q-list>
-
-      <center>
-        <div class="absolute-bottom">
-        <a href="https://discord.gg/8rXp7XnaTq" target="_blank" style="color: #251e17; font-size: 20pt;"><i class="fab fa-discord q-my-lg q-mx-sm"></i></a>
-        <a href="https://t.me/steemchurch_telegram" target="_blank" style="color: #251e17; font-size: 20pt;"><i class="fab fa-telegram q-my-lg q-mx-sm"></i></a>
-        </div>
-      </center>
     </q-drawer>
 
     <q-page-container>
       <router-view />
     </q-page-container>
-
   </q-layout>
 </template>
 
@@ -177,23 +170,8 @@ export default {
       selectedLand: "HEART LANDS"
     };
   },
-  mounted() {
-    var land = getUrlParameter("l");
-
-    if((typeof land === 'undefined') || (land === "")){
-        land = DEFAULT_LAND;
-    }
-
-    this.selectedLand = this.getLandName(land);
-  },
   updated() {
-    
-    /*  Disabled because resizing causes the canvas to flash which looks bad
-    if((this.rightDrawerOpen) && ($(window).width() > 800)){
-      $('#content_iframe').css("width", ($(window).width()-300) + "px");
-    } else{
-      $('#content_iframe').css("width", "100%");
-    }*/
+    //reqIFRAME_SRC();
   },
   methods: {
     onItemClick(land) {
@@ -201,31 +179,25 @@ export default {
       //sURL = sURL.split("?")[0] + "?l="+land;
       //window.location.href = sURL;
 
-      this.selectedLand = this.getLandName(land);
+      if(land === "laa11"){
+        this.selectedLand = "The Emerald Coast";
+      } else if( land === "laa12" ) {
+        this.selectedLand = "Sapphire Isle";
+      } else if( land === "laa13" ) {
+        this.selectedLand = "Pelican Harbor";
+      } else if (land === "laa21" ) {
+        this.selectedLand = "Silverton Strait";
+      } else if (land === "laa22" ) {
+        this.selectedLand = "The Topaz River"; 
+      } else if (land === "laa23" ) {
+        this.selectedLand = "Honey Fields"; 
+      } else if (land === "laa32") {
+        this.selectedLand = "Chrysolite Mountain";
+      } else {
+        this.selectedLand = "HEART LANDS";
+      }
 
       reqIFRAME_SRC(land);
-    },
-    getLandName(land) {
-
-        if(land === "laa11"){
-          return "The Emerald Coast";
-        } else if( land === "laa12" ) {
-          return "Sapphire Isle";
-        } else if( land === "laa13" ) {
-          return "Pelican Harbor";
-        } else if (land === "laa21" ) {
-          return "Silverton Strait";
-        } else if (land === "laa22" ) {
-          return "The Topaz River"; 
-        } else if (land === "laa23" ) {
-          return "Honey Fields"; 
-        } else if (land === "laa32") {
-          return "Chrysolite Mountain";
-        } else {
-          return "HEART LANDS";
-        }
-
-      return sLandName;
     }
   }
 };
