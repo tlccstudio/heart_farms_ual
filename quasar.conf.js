@@ -20,7 +20,7 @@ module.exports = function(/* ctx */) {
     // app boot file (/src/boot)
     // --> boot files are part of "main.js"
     // https://quasar.dev/quasar-cli/boot-files
-    boot: ["ual", "hyperion", "api", "evm"],
+    boot: ["ual", "hyperion", "api", "evm", "msg", "basic"],
 
     // https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-css
     css: ["app.sass"],
@@ -39,9 +39,12 @@ module.exports = function(/* ctx */) {
       "material-icons" // optional, you are not bound to it
     ],
 
+    publicPath: "./",
+
     // Full list of options: https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-build
     build: {
       vueRouterMode: "history", // available values: 'hash', 'history'
+      publicPath: "./",
       env: {
         APP_NAME: process.env.APP_NAME,
         NETWORK_CHAIN_ID: process.env.NETWORK_CHAIN_ID,

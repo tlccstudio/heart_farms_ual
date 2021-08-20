@@ -27,12 +27,15 @@ export const login = async function(
       dispatch("getAccountProfile");
     }
   } catch (e) {
-    const error =
+
+    console.log("Login error: ", JSON.stringify(e));
+
+    /*const error =
       (authenticator.getError() && authenticator.getError().message) ||
       e.message ||
       e.reason;
     commit("general/setErrorMsg", error, { root: true });
-    console.log("Login error: ", error);
+    console.log("Login error: ", error);*/
   } finally {
     commit("setLoadingWallet");
   }

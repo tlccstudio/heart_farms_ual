@@ -2,16 +2,16 @@
   <div>
     <div v-if="!isAuthenticated" class="q-px-md">
       <q-btn
-        @click="showLogin = true"
+        @click="showLoginFunc()"
         color="secondary"
         text-color="black"
         label="Login"
       />
     </div>
     <div v-if="isAuthenticated" class="q-px-md row">
-      <div @click="goToAccountPage" class="account-name q-px-md">
+      <!--<div @click="goToAccountPage" class="account-name q-px-md" id="acct_name">
         {{ accountName }}
-      </div>
+      </div>-->
       <q-btn
         @click="logout"
         color="secondary"
@@ -20,7 +20,7 @@
       />
     </div>
     <q-dialog v-model="showLogin">
-      <q-list>
+      <q-list style="min-width: var(--qauth_mwidth);" id="qlist_auths">
         <q-item
           v-for="(wallet, idx) in $ual.authenticators"
           :key="wallet.getStyle().text"
@@ -31,9 +31,9 @@
           }"
         >
           <q-item-section class="cursor-pointer" avatar @click="onLogin(idx)">
-            <img :src="wallet.getStyle().icon" width="30" />
+            <img :src="wallet.getStyle().icon" width="30" class="wallet-icons" />
           </q-item-section>
-          <q-item-section class="cursor-pointer" @click="onLogin(idx)">
+          <q-item-section class="cursor-pointer wallet-text" @click="onLogin(idx)" style="position: absolute; left: 55px; top: 15px;">
             {{ wallet.getStyle().text }}
           </q-item-section>
           <q-item-section class="flex" avatar>
@@ -46,11 +46,13 @@
               v-else
               :color="wallet.getStyle().textColor"
               icon="get_app"
-              @click="openUrl(wallet.getOnboardingLink())"
+              @click="openUrl(wallet.url_link)"
               target="_blank"
               dense
               flat
               size="12px"
+              style="position: absolute; left: var(--qauth_dl_left); top: 15px;"
+              class="wallet-download"
             >
               <q-tooltip>
                 Get app
@@ -89,6 +91,11 @@ export default {
   },
   methods: {
     ...mapActions("account", ["login", "logout", "autoLogin"]),
+    showLoginFunc() {
+      this.showLogin = true;
+      formatWalletLinks(this.$q.platform.is.desktop);
+      console.log("HERE");
+    },
     async onLogin(idx) {
       this.error = null;
       const error = await this.login({ idx });
@@ -108,6 +115,12 @@ export default {
   },
   async mounted() {
     await this.autoLogin(this.$route.query.returnUrl);
+
+    if(!GLOBAL_IS_DESKTOP){
+        var oDOM = document.getElementById("acct_name");
+
+        oDOM.style.display = 'none';
+    }
   }
 };
 </script>
