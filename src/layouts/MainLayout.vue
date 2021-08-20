@@ -6,12 +6,12 @@
 
         <q-toolbar-title>
           <a href="https://farm.heart-church.org/" style="text-decoration: none;">
-            <img class="logo" alt="Heart Farms" style="width: 42px; height: 42px; margin-bottom: -11px; margin-right: 10px;" src="icons/favicon-128x128.png" />
-            <span style="font-family: ZCOOL KuaiLe; color: var(--q-color-accent); font-size: 22pt; margin-bottom: 15px;">Heart Farms</span>
+            <img class="logo" alt="Heart Farms" style="width: 42px; height: 42px; margin-bottom: -11px; margin-right: 10px;" id="icon_main" src="icons/favicon-128x128.png" />
+            <span style="font-family: ZCOOL KuaiLe; color: var(--q-color-accent); font-size: 22pt; margin-bottom: 15px;" id="header_main">Heart Farms</span>
           </a>
         </q-toolbar-title>
 
-        <login-button></login-button>
+        <login-button id="login_button"></login-button>
 
         <q-btn
           flat
@@ -19,16 +19,25 @@
           round
           icon="menu"
           aria-label="Menu"
+          id="drawer_button"
           @click="rightDrawerOpen = !rightDrawerOpen"
         />
       </q-toolbar>
     </q-header>
 
-    <q-drawer :id="drawer_menu_1" v-model="rightDrawerOpen" side="right" bordered>
+    <q-drawer :id="drawer_menu_1" v-model="rightDrawerOpen" side="right" bordered :width="$q.platform.is.desktop ? '300px' : $q.screen.width">
       <q-list>
 
-        <q-btn round color="white" text-color="black" class="float-right q-my-sm q-mx-sm" icon="close" @click="rightDrawerOpen = !rightDrawerOpen" />
+        <q-btn round color="white" text-color="black" class="float-right q-my-sm q-mx-sm" icon="close" @click="rightDrawerOpen = !rightDrawerOpen" style="font-size: var(--close_x);" />
 
+      <q-item-label header class="text-grey-8">
+      Account:
+      </q-item-label>
+
+      <div class="q-px-md" style="" id="act_name">
+        Not logged in.
+      </div>
+        
         <q-item-label header class="text-grey-8">
         Land Selection:
         </q-item-label>
@@ -38,43 +47,43 @@
         <q-list>
           <q-item clickable v-close-popup @click="onItemClick('laa11')">
             <q-item-section>
-              <q-item-label>The Emerald Coast</q-item-label>
+              <q-item-label style="font-size: var(--btndropsize);">The Emerald Coast</q-item-label>
             </q-item-section>
           </q-item>
 
           <q-item clickable v-close-popup @click="onItemClick('laa12')">
             <q-item-section>
-              <q-item-label>Sapphire Isle</q-item-label>
+              <q-item-label style="font-size: var(--btndropsize);">Sapphire Isle</q-item-label>
             </q-item-section>
           </q-item>
 
           <q-item clickable v-close-popup @click="onItemClick('laa13')">
             <q-item-section>
-              <q-item-label>Pelican Harbor</q-item-label>
+              <q-item-label style="font-size: var(--btndropsize);">Pelican Harbor</q-item-label>
             </q-item-section>
           </q-item>
 
           <q-item clickable v-close-popup @click="onItemClick('laa21')">
             <q-item-section>
-              <q-item-label>Silverton Strait</q-item-label>
+              <q-item-label style="font-size: var(--btndropsize);">Silverton Strait</q-item-label>
             </q-item-section>
           </q-item>
 
           <q-item clickable v-close-popup @click="onItemClick('laa22')">
             <q-item-section>
-              <q-item-label>The Topaz River</q-item-label>
+              <q-item-label style="font-size: var(--btndropsize);">The Topaz River</q-item-label>
             </q-item-section>
           </q-item>
 
           <q-item clickable v-close-popup @click="onItemClick('laa23')">
             <q-item-section>
-              <q-item-label>Honey Fields</q-item-label>
+              <q-item-label style="font-size: var(--btndropsize);">Honey Fields</q-item-label>
             </q-item-section>
           </q-item>
 
           <q-item clickable v-close-popup @click="onItemClick('laa32')">
             <q-item-section>
-              <q-item-label>Chrysolite Mountain</q-item-label>
+              <q-item-label style="font-size: var(--btndropsize);">Chrysolite Mountain</q-item-label>
             </q-item-section>
           </q-item>
         </q-list>
@@ -101,9 +110,10 @@
       </q-list>
 
       <center>
-        <div class="absolute-bottom">
-        <a href="https://discord.gg/8rXp7XnaTq" target="_blank" style="color: #251e17; font-size: 20pt;"><i class="fab fa-discord q-my-lg q-mx-sm"></i></a>
-        <a href="https://t.me/steemchurch_telegram" target="_blank" style="color: #251e17; font-size: 20pt;"><i class="fab fa-telegram q-my-lg q-mx-sm"></i></a>
+        <div width="100%">
+        <a href="https://discord.gg/8rXp7XnaTq" target="_blank" style="color: #251e17; font-size: 20pt;"><i class="fab fa-discord q-my-lg q-mx-sm fa-drawer_icons"></i></a>
+        <a href="https://t.me/steemchurch_telegram" target="_blank" style="color: #251e17; font-size: 20pt;"><i class="fab fa-telegram q-my-lg q-mx-sm fa-drawer_icons"></i></a>
+        <a href="https://steemit.com/trending/hive-108514" target="_blank" style="color: #251e17; font-size: 20pt;"><i class="fas fa-heart q-my-lg q-mx-sm fa-drawer_icons"></i></a>
         </div>
       </center>
     </q-drawer>
@@ -116,6 +126,7 @@
 </template>
 
 <script>
+
 import EssentialLink from "components/EssentialLink.vue";
 //import ExamplePage from "components/ExamplePage.vue";
 import LoginButton from "components/LoginButton.vue";
@@ -161,7 +172,7 @@ const linksData = [
   {
     title: "Heart Church Organization",
     caption: "heart-church.org",
-    icon: "favorite",
+    icon: "fas fa-globe",
     link: "https://heart-church.org/"
   }
 ];
@@ -174,7 +185,9 @@ export default {
       rightDrawerOpen: false,
       essentialLinks: linksData,
       examplePages: pagesData,
-      selectedLand: "HEART LANDS"
+      selectedLand: "HEART LANDS",
+      mobileResize: false,
+      elementFontSize: "100pt"
     };
   },
   mounted() {
@@ -182,6 +195,17 @@ export default {
 
     if((typeof land === 'undefined') || (land === "")){
         land = DEFAULT_LAND;
+    }
+
+    //resizing of fonts and elements for mobile
+    if(this.mobileResize === false) {
+
+      setTimeout(function() {
+        //resizing of fonts and elements for mobile
+        formatForDevice(GLOBAL_IS_DESKTOP);
+      }, 750);
+
+      this.mobileResize = true;
     }
 
     this.selectedLand = this.getLandName(land);
@@ -203,7 +227,12 @@ export default {
 
       this.selectedLand = this.getLandName(land);
 
+      this.toggleOpen();
+
       reqIFRAME_SRC(land);
+    },
+    toggleOpen(){
+      this.rightDrawerOpen = !this.rightDrawerOpen;
     },
     getLandName(land) {
 

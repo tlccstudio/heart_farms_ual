@@ -17,13 +17,37 @@ export default async ({ Vue, store }) => {
     ]
   };
 
-  const authenticators = [
+  var authenticators = [
     new KeycatAuthenticator([chain], { appName: process.env.APP_NAME }),
     new Sqrl([chain], { appName: process.env.APP_NAME }),
     new Anchor([chain], { appName: process.env.APP_NAME }),
     new Wombat([chain], { appName: process.env.APP_NAME }),
     new Scatter([chain], { appName: process.env.APP_NAME })
   ];
+
+  //Setup authenticator links
+  authenticators[0].url_link = "https://app.gitbook.com/@keycatdev/s/keycatjs/keycat/how-to-use";
+  authenticators[1].url_link = "https://sqrlwallet.io/";
+
+  if(isAndroid()) {
+    authenticators[2].url_link = "https://play.google.com/store/apps/details?id=com.greymass.anchor";
+  }
+  else if(isIOS()) {
+    authenticators[2].url_link = "https://apps.apple.com/us/app/anchor-wallet/id1487410877";
+  }
+  else {
+    authenticators[2].url_link = "https://greymass.com/en/anchor/download";
+  }
+
+  authenticators[3].url_link = "https://getwombat.io/";
+  authenticators[4].url_link = "https://www.get-scatter.com/";
+
+
+  //Mobile Wallet Filter - Remove those which don't work well on mobile.
+  if(isMobile()){
+    authenticators.splice(1,1); //removes SQRL
+    authenticators.splice(2,2); //removes Wombat, Scatter
+  }
 
   const ual = new UAL([chain], "ual", authenticators);
   store["$ual"] = ual;

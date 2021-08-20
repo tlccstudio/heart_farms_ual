@@ -39,9 +39,12 @@ module.exports = function(/* ctx */) {
       "material-icons" // optional, you are not bound to it
     ],
 
+    publicPath: "./",
+
     // Full list of options: https://quasar.dev/quasar-cli/quasar-conf-js#Property%3A-build
     build: {
       vueRouterMode: "history", // available values: 'hash', 'history'
+      publicPath: "./",
       env: {
         APP_NAME: process.env.APP_NAME,
         NETWORK_CHAIN_ID: process.env.NETWORK_CHAIN_ID,

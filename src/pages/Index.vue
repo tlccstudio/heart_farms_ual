@@ -4,7 +4,7 @@
     </h6>
       
       <center>
-        <iframe src='' id='content_iframe' style='width: 100%; height: 100%; z-index: 1; position: fixed; top: 45px; left: 0px; border: 0px solid black;'>
+        <iframe src='' id='content_iframe' style='width: 100%; height: 100%; z-index: 1; position: fixed; left: 0px; top: 45px; border: 0px solid black;'>
         </iframe>
       </center>
     

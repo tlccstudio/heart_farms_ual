@@ -62,11 +62,13 @@ export default {
       window.attachEvent('onmessage', this.listenWindowMessage)
     }
 
+    GLOBAL_IS_DESKTOP = this.$q.platform.is.desktop;
+
     this.loopSwitch = true;
     var aHeartbeat = this.appHeartbeat;
     setTimeout(function() {
       aHeartbeat();
-    }, 2000);
+    }, 500);
   },
   beforeDestroy () {
     if (window.addEventListener) {
@@ -82,15 +84,21 @@ export default {
 
     appHeartbeat() {
 
+      //handle account logins
       if(this.$store.state.account.accountName !== this.cAccountName){
 
         this.cAccountName = this.$store.state.account.accountName;
 
-        if(typeof this.cAccountName !== 'undefined')
-        { this.$store.$msg.issueLoginNoticeToChild(this.cAccountName); }
-        else
-        { this.$store.$msg.issueLogoutNoticeToChild(); }
+        if(typeof this.cAccountName !== 'undefined') {
+          this.$store.$msg.issueLoginNoticeToChild(this.cAccountName);
+          document.getElementById('act_name').innerHTML = this.cAccountName;
+        }
+        else {
+          this.$store.$msg.issueLogoutNoticeToChild();
+          document.getElementById('act_name').innerHTML = "Not logged in.";
+        }
       }
+
 
       if(this.loopSwitch) {
         var aHeartbeat = this.appHeartbeat;
@@ -215,6 +223,11 @@ export default {
           return;
         }
 
+        if(typeof data.message === 'undefined'){
+          console.log("no data.message is undefined, aborting...");
+          return;
+        }
+        
         if(data.message.length == 0) {
           console.log("no data.message.length, aborting...");
           console.log("data output...");
