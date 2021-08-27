@@ -89,6 +89,7 @@
 
       const DEFAULT_LAND = "laa32";
       var selected_Land = "laa32";
+      var first_land = "";
 
       var GLOBAL_IS_DESKTOP = true;
 
@@ -122,6 +123,8 @@
       return ( (typeof val === 'function') || (typeof val === 'object') );
     }
 
+    var bIgnorePlot = false;
+
     function reqIFRAME_SRC(sLand, forceRefresh = false){
       var iframe = document.getElementById('content_iframe');
 
@@ -143,6 +146,19 @@
 
           selected_Land = land;
 
+          if(first_land === "")
+          { first_land = land; }
+          
+          if(land !== first_land){
+            bIgnorePlot = true;
+          }
+
+          var plot = getUrlParameter("p");
+          var plot_var = '';
+
+          if((typeof plot !== 'undefined') && (!bIgnorePlot))
+          { plot_var = "plot=" + plot + '&'; }
+
           var debug = getUrlParameter("debug");
           var debug_var = '';
 
@@ -151,7 +167,7 @@
 
           var url = window.location.href;
           url = url.split('?')[0];
-          url = url + 'xeros/hflive/canvas.php?' + land_var + debug_var;
+          url = url + 'xeros/hflive/canvas.php?' + land_var + debug_var + plot_var;
           
           var c_url = iframe.src;
           
@@ -177,7 +193,7 @@
 
     $( document ).ready(function() {
 
-      console.log("Heart Farms - Virtual Land Auction (xeros_v0.84b0107)");
+      console.log("Heart Farms - Virtual Land Auction (xeros_v0.84b0131)");
 
     });
 
