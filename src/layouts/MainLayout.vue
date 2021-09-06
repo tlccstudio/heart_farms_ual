@@ -37,6 +37,7 @@
       <div class="q-px-md" style="" id="act_name">
         Not logged in.
       </div>
+
         
         <q-item-label header class="text-grey-8">
         Land Selection:
@@ -133,8 +134,8 @@ import LoginButton from "components/LoginButton.vue";
 
 const pagesData = [
   /*{
-    title: "Dashboard",
-    caption: "Home",
+    title: "Account Settings",
+    caption: "User permissions setup",
     icon: "computer",
     path: "/"
   }*/
