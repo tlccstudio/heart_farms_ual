@@ -82,6 +82,12 @@
             </q-item-section>
           </q-item>
 
+          <q-item clickable v-close-popup @click="onItemClick('laa31')">
+            <q-item-section>
+              <q-item-label style="font-size: var(--btndropsize);">Onyx Valley</q-item-label>
+            </q-item-section>
+          </q-item>
+
           <q-item clickable v-close-popup @click="onItemClick('laa32')">
             <q-item-section>
               <q-item-label style="font-size: var(--btndropsize);">Chrysolite Mountain</q-item-label>
@@ -251,6 +257,8 @@ export default {
           return "Honey Fields"; 
         } else if (land === "laa32") {
           return "Chrysolite Mountain";
+        } else if (land === "laa31") {
+          return "Onyx Valley";
         } else {
           return "HEART LANDS";
         }
