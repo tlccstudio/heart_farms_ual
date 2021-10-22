@@ -265,6 +265,8 @@ export default {
           return "Chrysolite Mountain";
         } else if (land === "laa31") {
           return "Onyx Valley";
+        } else if (land === "laa42") {
+          return "Angels Passage";
         } else {
           return "HEART LANDS";
         }
