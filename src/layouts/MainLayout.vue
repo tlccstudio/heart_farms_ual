@@ -93,6 +93,12 @@
               <q-item-label style="font-size: var(--btndropsize);">Chrysolite Mountain</q-item-label>
             </q-item-section>
           </q-item>
+
+          <q-item clickable v-close-popup @click="onItemClick('laa42')">
+            <q-item-section>
+              <q-item-label style="font-size: var(--btndropsize);">Angels Passage</q-item-label>
+            </q-item-section>
+          </q-item>
         </q-list>
         </q-btn-dropdown>
         </center>
