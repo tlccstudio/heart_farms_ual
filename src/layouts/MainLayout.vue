@@ -99,6 +99,12 @@
               <q-item-label style="font-size: var(--btndropsize);">Angels Passage</q-item-label>
             </q-item-section>
           </q-item>
+
+          <q-item clickable v-close-popup @click="onItemClick('laa52')">
+            <q-item-section>
+              <q-item-label style="font-size: var(--btndropsize);">White Rock Ranges</q-item-label>
+            </q-item-section>
+          </q-item>
         </q-list>
         </q-btn-dropdown>
         </center>
@@ -267,6 +273,8 @@ export default {
           return "Onyx Valley";
         } else if (land === "laa42") {
           return "Angels Passage";
+        } else if (land === "laa52") {
+          return "White Rock Ranges";
         } else {
           return "HEART LANDS";
         }
