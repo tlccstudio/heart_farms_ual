@@ -38,6 +38,19 @@
         Not logged in.
       </div>
 
+      <q-item-label header class="text-grey-8">
+          Heart Farms:
+      </q-item-label>
+
+      <center>
+        <q-btn color="info" v-close-popup @click="onPlayClick()">PLAY NOW</q-btn>
+      </center>
+
+      <!--<ExamplePage
+          v-for="link in examplePages"
+          :key="link.title"
+          v-bind="link"
+      />-->
         
         <q-item-label header class="text-grey-8">
         Land Selection:
@@ -109,14 +122,6 @@
         </q-btn-dropdown>
         </center>
 
-        <!--<q-item-label header class="text-grey-8">
-          System Links
-        </q-item-label>
-        <ExamplePage
-          v-for="link in examplePages"
-          :key="link.title"
-          v-bind="link"
-        />-->
 
         <q-item-label header class="text-grey-8">
           External Links
@@ -151,12 +156,12 @@ import EssentialLink from "components/EssentialLink.vue";
 import LoginButton from "components/LoginButton.vue";
 
 const pagesData = [
-  /*{
-    title: "Account Settings",
-    caption: "User permissions setup",
+  {
+    title: "Play Heart Farms",
+    caption: "Game world login",
     icon: "computer",
-    path: "/"
-  }*/
+    path: "/play"
+  }
 ];
 
 const linksData = [
@@ -244,11 +249,21 @@ export default {
       //sURL = sURL.split("?")[0] + "?l="+land;
       //window.location.href = sURL;
 
+      new_selected_land = land;
       this.selectedLand = this.getLandName(land);
 
       this.toggleOpen();
 
-      reqIFRAME_SRC(land);
+      if (this.$router.currentRoute.path !== "/") {
+          this.$router.push({ path: "/" });
+      } else {
+        reqIFRAME_SRC(land);
+      }
+    },
+    onPlayClick() {
+      this.toggleOpen();
+
+      this.$router.push({ path: "/play" });
     },
     toggleOpen(){
       this.rightDrawerOpen = !this.rightDrawerOpen;

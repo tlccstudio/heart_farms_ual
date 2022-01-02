@@ -89,6 +89,7 @@
 
       const DEFAULT_LAND = "laa52";
       var selected_Land = "laa52";
+      var new_selected_land = "";
       var first_land = "";
 
       var GLOBAL_IS_DESKTOP = true;
@@ -132,6 +133,8 @@
           var land = "";
           if(sLand !== null){
             land = sLand;
+          } else if (new_selected_land !== "") {
+            land = new_selected_land;
           } else {
             land = getUrlParameter("l");
           }
@@ -177,6 +180,8 @@
           if((url !== c_url) || (forceRefresh))
           { iframe.src = url; }
       }
+      
+      new_selected_land = "";
     }
 
 
