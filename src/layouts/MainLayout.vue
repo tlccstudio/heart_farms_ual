@@ -87,9 +87,27 @@
             </q-item-section>
           </q-item>
 
+          <q-item clickable v-close-popup @click="onItemClick('laa31')">
+            <q-item-section>
+              <q-item-label style="font-size: var(--btndropsize);">Onyx Valley</q-item-label>
+            </q-item-section>
+          </q-item>
+
           <q-item clickable v-close-popup @click="onItemClick('laa32')">
             <q-item-section>
               <q-item-label style="font-size: var(--btndropsize);">Chrysolite Mountain</q-item-label>
+            </q-item-section>
+          </q-item>
+
+          <q-item clickable v-close-popup @click="onItemClick('laa42')">
+            <q-item-section>
+              <q-item-label style="font-size: var(--btndropsize);">Angels Passage</q-item-label>
+            </q-item-section>
+          </q-item>
+
+          <q-item clickable v-close-popup @click="onItemClick('laa52')">
+            <q-item-section>
+              <q-item-label style="font-size: var(--btndropsize);">White Rock Ranges</q-item-label>
             </q-item-section>
           </q-item>
         </q-list>
@@ -248,6 +266,12 @@ export default {
           return "Honey Fields"; 
         } else if (land === "laa32") {
           return "Chrysolite Mountain";
+        } else if (land === "laa31") {
+          return "Onyx Valley";
+        } else if (land === "laa42") {
+          return "Angels Passage";
+        } else if (land === "laa52") {
+          return "White Rock Ranges";
         } else {
           return "HEART LANDS";
         }
