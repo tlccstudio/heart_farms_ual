@@ -34,17 +34,35 @@
       Account:
       </q-item-label>
 
-      <div class="q-px-md" style="" id="act_name">
-        Not logged in.
-      </div>
-
-      <q-item-label header class="text-grey-8">
-          Heart Farms:
-      </q-item-label>
+      <div class="q-px-md" style="">Telos: <span id="act_name">Not logged in.</span></div>
+      <div class="q-px-md" style="">Player Name: <span id="act_playername">None</span></div>
 
       <center>
+        <q-btn color="positive" @click="onPlayerSetup()">KEY SETUP</q-btn>
         <q-btn color="info" v-close-popup @click="onPlayClick()">PLAY NOW</q-btn>
       </center>
+
+      <q-dialog v-model="showPlayerSetup" confirm>
+        <q-card>
+          <q-card-section class="row">
+            <span style="font-size: 14pt;">Player Setup (@meta Permission)</span>
+          </q-card-section>
+
+          <q-card-section class="row">
+            <q-input outlined v-model="metaPubKey" label="Public Key" style="min-width: 350px;" />
+          </q-card-section>
+
+          <q-card-section class="row">
+            <q-input outlined v-model="metaPrvKey" label="Private Key" style="min-width: 350px;" />
+          </q-card-section>
+          
+          <q-card-actions align="right">
+            <q-btn label="CANCEL" flat v-close-popup></q-btn>
+            <q-btn label="GENERATE NEW KEY" color="positive" v-close-popup></q-btn>
+            <q-btn label="SUBMIT" color="info" v-close-popup></q-btn>
+          </q-card-actions>
+        </q-card>
+      </q-dialog>
 
       <!--<ExamplePage
           v-for="link in examplePages"
@@ -211,7 +229,10 @@ export default {
       examplePages: pagesData,
       selectedLand: "HEART LANDS",
       mobileResize: false,
-      elementFontSize: "100pt"
+      elementFontSize: "100pt",
+      showPlayerSetup: false,
+      metaPubKey: "",
+      metaPrvKey: ""
     };
   },
   mounted() {
@@ -264,6 +285,14 @@ export default {
       this.toggleOpen();
 
       this.$router.push({ path: "/play" });
+    },
+    onPlayerSetup() {
+      this.toggleOpen();
+
+      this.showPlayerSetup = true;
+    },
+    prompt () {
+      
     },
     toggleOpen(){
       this.rightDrawerOpen = !this.rightDrawerOpen;
