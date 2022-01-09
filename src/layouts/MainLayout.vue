@@ -38,12 +38,7 @@
         Not logged in.
       </div>
 
-        <ExamplePage
-          v-for="link in examplePages"
-          :key="link.title"
-          v-bind="link"
-        />
-
+        
         <q-item-label header class="text-grey-8">
         Land Selection:
         </q-item-label>
@@ -114,6 +109,14 @@
         </q-btn-dropdown>
         </center>
 
+        <!--<q-item-label header class="text-grey-8">
+          System Links
+        </q-item-label>
+        <ExamplePage
+          v-for="link in examplePages"
+          :key="link.title"
+          v-bind="link"
+        />-->
 
         <q-item-label header class="text-grey-8">
           External Links
@@ -144,16 +147,16 @@
 <script>
 
 import EssentialLink from "components/EssentialLink.vue";
-import ExamplePage from "components/ExamplePage.vue";
+//import ExamplePage from "components/ExamplePage.vue";
 import LoginButton from "components/LoginButton.vue";
 
 const pagesData = [
-  {
+  /*{
     title: "Account Settings",
     caption: "User permissions setup",
     icon: "computer",
-    path: "/account"
-  }
+    path: "/"
+  }*/
 ];
 
 const linksData = [
@@ -195,7 +198,7 @@ const linksData = [
 
 export default {
   name: "MainLayout",
-  components: { EssentialLink, ExamplePage, LoginButton },
+  components: { EssentialLink, /*ExamplePage,*/ LoginButton },
   data() {
     return {
       rightDrawerOpen: false,
