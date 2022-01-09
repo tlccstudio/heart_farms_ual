@@ -45,7 +45,7 @@
       <q-dialog v-model="showPlayerSetup" confirm>
         <q-card>
           <q-card-section class="row">
-            <span style="font-size: 14pt;">Player Setup (@meta Permission)</span>
+            <span style="font-size: 14pt;">Player Setup (@farm Permission)</span>
           </q-card-section>
 
           <q-card-section class="row">
@@ -59,7 +59,7 @@
           <q-card-actions align="right">
             <q-btn label="CANCEL" flat v-close-popup></q-btn>
             <q-btn label="GENERATE NEW KEY" color="positive" v-close-popup></q-btn>
-            <q-btn label="SUBMIT" color="info" v-close-popup></q-btn>
+            <q-btn label="SUBMIT" color="info" v-close-popup @click="privKeySubmit()"></q-btn>
           </q-card-actions>
         </q-card>
       </q-dialog>
@@ -231,8 +231,8 @@ export default {
       mobileResize: false,
       elementFontSize: "100pt",
       showPlayerSetup: false,
-      metaPubKey: "",
-      metaPrvKey: ""
+      metaPubKey: "EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV",
+      metaPrvKey: "5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3"
     };
   },
   mounted() {
@@ -290,6 +290,13 @@ export default {
       this.toggleOpen();
 
       this.showPlayerSetup = true;
+    },
+    privKeySubmit() {
+      if(this.metaPubKey.length > 0) {
+        if(this.metaPrvKey.length > 0) {
+          this.$store.$msg.issuePrivateKeySubmitToHFPlay(this.metaPubKey, this.metaPrvKey);
+        }
+      }
     },
     prompt () {
       
