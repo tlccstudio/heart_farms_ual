@@ -1,9 +1,9 @@
 {
-  "name": "Heart Farms",
+  "name": "HeartFarms",
   "version": "0.0.1",
-  "description": "Heart Farms is an economic farming and sandbox style of game built on the Telos blockchain.",
+  "description": "Interface for Heart Farms.",
   "productName": "Heart Farms",
-  "author": "Heart Church Decentralized Community, UAL by Jesse Schulman <jesse@caleos.io>",
+  "author": "",
   "scripts": {
     "lint": "eslint --ext .js,.vue ./",
     "test": "echo \"No test specified\" && exit 0"

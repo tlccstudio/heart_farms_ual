@@ -6,7 +6,7 @@
 
         <q-toolbar-title>
           <a href="https://farm.heart-church.org/" style="text-decoration: none;">
-            <img class="logo" alt="Heart Farms" style="width: 42px; height: 42px; margin-bottom: -11px; margin-right: 10px;" id="icon_main" src="icons/favicon-128x128.png" />
+            <img class="logo" alt="Heart Farms" style="width: 42px; height: 42px; margin-bottom: -11px; margin-right: 10px;" id="icon_main" src="https://hf.heart-church.org/icons/favicon-128x128.png" />
             <span style="font-family: ZCOOL KuaiLe; color: var(--q-color-accent); font-size: 22pt; margin-bottom: 15px;" id="header_main">Heart Farms</span>
           </a>
         </q-toolbar-title>
@@ -134,6 +134,12 @@
           <q-item clickable v-close-popup @click="onItemClick('laa52')">
             <q-item-section>
               <q-item-label style="font-size: var(--btndropsize);">White Rock Ranges</q-item-label>
+            </q-item-section>
+          </q-item>
+
+          <q-item clickable v-close-popup @click="onItemClick('laa51')">
+            <q-item-section>
+              <q-item-label style="font-size: var(--btndropsize);">King's Canyon</q-item-label>
             </q-item-section>
           </q-item>
         </q-list>
