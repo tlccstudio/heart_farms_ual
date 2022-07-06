@@ -105,6 +105,12 @@
               <q-item-label style="font-size: var(--btndropsize);">White Rock Ranges</q-item-label>
             </q-item-section>
           </q-item>
+
+          <q-item clickable v-close-popup @click="onItemClick('laa51')">
+            <q-item-section>
+              <q-item-label style="font-size: var(--btndropsize);">King's Canyon</q-item-label>
+            </q-item-section>
+          </q-item>
         </q-list>
         </q-btn-dropdown>
         </center>
