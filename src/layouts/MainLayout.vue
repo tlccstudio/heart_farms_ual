@@ -37,10 +37,10 @@
       <div class="q-px-md" style="">Telos: <span id="act_name">Not logged in.</span></div>
       <div class="q-px-md" style="">Player Name: <span id="act_playername">None</span></div>
 
-      <!--<center>
+      <center>
         <q-btn color="positive" @click="onPlayerSetup()">KEY SETUP</q-btn>
         <q-btn color="info" v-close-popup @click="onPlayClick()">PLAY NOW</q-btn>
-      </center>-->
+      </center>
 
       <q-dialog v-model="showPlayerSetup" confirm>
         <q-card>
